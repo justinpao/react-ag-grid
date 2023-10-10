@@ -8,8 +8,14 @@ import 'ag-grid-community/styles/ag-theme-alpine.css'; // Optional theme CSS
 const App = ({ triggerQuery, model, modelUpdate }) => {
 
  const gridRef = useRef(); // Optional - for accessing Grid's API
- const [rowData, setRowData] = useState(model.data); // Set rowData to Array of Objects, one Object per Row
-
+//  const [rowData, setRowData] = useState(model.data); // Set rowData to Array of Objects, one Object per Row
+const rowData = [
+  { orgHierarchy: ['Erica'], jobTitle: "CEO", employmentType: "Permanent" },
+  { orgHierarchy: ['Erica', 'Malcolm'], jobTitle: "VP", employmentType: "Permanent" }
+  
+]
+// just return the hierarchy, no conversion required
+const getDataPath: data => {return data.orgHierarchy;}
  // Each Column Definition results in one Column.
  const [columnDefs, setColumnDefs] = useState(model.columns);
 
@@ -52,6 +58,7 @@ const App = ({ triggerQuery, model, modelUpdate }) => {
            ref={gridRef} // Ref for accessing Grid's API
 
            rowData={rowData} // Row Data for Rows
+
 
            columnDefs={columnDefs} // Column Defs for Columns
            defaultColDef={defaultColDef} // Default Column Properties
